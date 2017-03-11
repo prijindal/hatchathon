@@ -6,6 +6,7 @@ import {
 
 
 import Editor from '../components/Editor/Editor';
+import Login from '../components/Login/Login';
 import Home from '../components/Home/Home';
 
 const App = () => (
@@ -18,6 +19,7 @@ const App = () => (
           <div id="content"></div>
           <div id="terminal">
             <Route exact path="/" component={Editor} />
+            <Route exact path="/login" component={Login} />
             <Route path="/quit" component={Home} />
           </div>
         </div>
