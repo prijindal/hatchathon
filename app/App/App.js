@@ -4,6 +4,11 @@ import {
   Route,
 } from 'react-router-dom';
 
+
+import EditorPage from '../components/EditorPage';
+import Login from '../components/Login';
+import Home from '../components/Home/Home';
+
 const THEMES = [
   'default',
   'yellow-blue',
@@ -11,10 +16,6 @@ const THEMES = [
   'steelblue',
   'fire',
 ];
-
-import EditorPage from '../components/EditorPage';
-import Login from '../components/Login';
-import Home from '../components/Home/Home';
 
 const App = ({ setTheme, theme }) => (
   <Router>

@@ -5,11 +5,11 @@ import { login } from '../../utils/firebase';
 class Login extends PureComponent {
   login = () => {
     login()
-    .then(token => this.props.setUser(token));
+    .then(user => this.props.setUser(user));
   }
 
   render() {
-    if (this.props.user.token) {
+    if (this.props.user.credential) {
       return <Redirect to=""/>
     }
     return (

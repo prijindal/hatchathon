@@ -3,17 +3,13 @@ import Immutable from 'seamless-immutable';
 import type { Action } from '../actions/types';
 import { SET_USER } from '../actions/user';
 
-export type State = {
-  token: string
-}
+export type State = {}
 
-const INITIAL_STATE = Immutable({
-  token: '',
-});
+const INITIAL_STATE = Immutable({});
 
 const setUser = (state: State = INITIAL_STATE, action: Action) => ({
   ...state,
-  token: action.payload,
+  ...action.payload,
 });
 
 const HANDLERS = {

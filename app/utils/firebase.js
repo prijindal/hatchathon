@@ -10,18 +10,18 @@ const config = {
 firebase.initializeApp(config);
 
 const storage = firebase.storage();
-const pathRef = storage.ref('test.html');
 
 export const login = () => new Promise((resolve, reject) => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider)
   .then((result) => {
-    resolve(result.credential.accessToken);
+    resolve(result);
   })
   .catch(reject);
 });
 
-export const getFile = () => new Promise((resolve, reject) => {
+export const getFile = email => new Promise((resolve, reject) => {
+  const pathRef = storage.ref(`${email}/test.html`);
   pathRef.getDownloadURL()
   .then((url) => {
     fetch(url)
@@ -35,7 +35,8 @@ export const getFile = () => new Promise((resolve, reject) => {
   .catch(reject);
 });
 
-export const saveFile = text => new Promise((resolve, reject) => {
+export const saveFile = (email, text) => new Promise((resolve, reject) => {
+  const pathRef = storage.ref(`${email}/test.html`);
   pathRef.putString(text).then(resolve).catch(reject);
 });
 

@@ -6,7 +6,7 @@ import { setUser } from '../../actions/user';
 const mapStateToProps = ({ user }) => ({ user });
 
 const mapDispatchToProps = dispatch => ({
-  setUser: token => dispatch(setUser(token)),
+  setUser: user => dispatch(setUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

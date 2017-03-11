@@ -56,22 +56,20 @@ class Editor extends PureComponent {
   }
 
   getFile = () => {
-    getFile()
+    getFile(this.props.user.user.email)
     .then((text) => {
-      console.log(text);
       this.quill.focus();
       if (!text) return;
       this.quill.deleteText(0, this.quill.getText().length);
       this.quill.insertText(0, text);
     })
     .catch((err) => {
-      console.error(err);
       this.quill.focus();
     });
   }
 
   saveFile = (text) => {
-    saveFile(text);
+    saveFile(this.props.user.user.email,text);
   }
 
   focusInput = () => {
