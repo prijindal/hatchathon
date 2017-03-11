@@ -12,7 +12,7 @@ const THEMES = [
   'fire',
 ];
 
-import Editor from '../components/Editor';
+import EditorPage from '../components/EditorPage';
 import Login from '../components/Login';
 import Home from '../components/Home/Home';
 
@@ -46,7 +46,7 @@ const App = ({ setTheme, theme }) => (
 
           </div>
           <div id="terminal">
-            <Route exact path="/" component={Editor} />
+            <Route exact path="/" component={EditorPage} />
             <Route exact path="/login" component={Login} />
             <Route path="/quit" component={Home} />
           </div>
