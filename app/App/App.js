@@ -59,9 +59,9 @@ class App extends PureComponent {
   search = (argument) => {
     const text = this.quill.getText();
     const results = search(text, argument);
+    this.quill.removeFormat(0, text.length);
     results.forEach((result) => {
-      this.quill.deleteText(result[0], argument.length);
-      this.quill.insertText(result[0], text.substring(result[0], result[1]), {
+      this.quill.formatText(result[0], argument.length, {
         color: '#ffff00',
       });
     });
