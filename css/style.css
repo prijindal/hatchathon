@@ -1,20 +1,24 @@
 
 #commands {
-	width: 739px;
+	width: 651px;
 	height: 40px;
 	color: #fff;
+	border-radius: 0 0 10px 10px ;
 }
 
 #terminal {
 	margin: 50px auto;	
-	text-align: center;
+	text-align: center;;
 }
 
 #editor {
 	color: #fff;
+	border-radius: 10px 10px 0 0 ;
 }
 
 #commands,
 #editor {
+	font-family: 'Ubuntu Mono', monospace;
 	background: #424040;
+	font-size: 1em;
 }
