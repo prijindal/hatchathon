@@ -23,7 +23,28 @@ const App = ({ setTheme, theme }) => (
         <div id="heading">Vim-<span id="heading-bold">me</span></div>
 
         <div id="terminal-background">
-          <div id="content"></div>
+          <div id="content">
+            <div className="msg-type1">
+              Welcome to Vim-me!!
+            </div>
+
+            <div className="msg-type2">
+              Welcome to Vim-me!!
+            </div>
+
+            <div className="msg-type1">
+              Welcome to Vim-me!!
+            </div>
+
+            <div className="msg-type1">
+              Welcome to Vim-me!!
+            </div>
+
+            <div className="msg-type2">
+              Welcome to Vim-me!!
+            </div>
+
+          </div>
           <div id="terminal">
             <Route exact path="/" component={Editor} />
             <Route exact path="/login" component={Login} />
