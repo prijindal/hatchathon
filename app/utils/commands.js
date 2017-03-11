@@ -13,6 +13,19 @@ const commands = (input) => {
         command: 'write',
       };
     }
+    if (input[1] === 's' && input.length > 4) {
+      let subCommand = input.substr(5);
+      console.log(subCommand);
+      if (subCommand === 'number') {
+        return {
+          command: 'setNumber',
+        };
+      } else if (subCommand === 'nonumber') {
+        return {
+          command: 'setNoNumber',
+        };
+      }
+    }
   }
   if (input[0] === '?' && input.length > 1) {
     return searchAction(input);
