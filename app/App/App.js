@@ -7,6 +7,7 @@ import {
 
 import EditorPage from '../components/EditorPage';
 import Login from '../components/Login';
+import Intro from '../components/Intro/Intro';
 import Home from '../components/Home/Home';
 
 const THEMES = [
@@ -17,7 +18,7 @@ const THEMES = [
   'fire',
 ];
 
-const App = ({ setTheme, theme }) => (
+const App = ({ setTheme, theme, tutorials }) => (
   <Router>
     <div id="main" className={theme}>
       <div id="flex1">
@@ -25,30 +26,17 @@ const App = ({ setTheme, theme }) => (
 
         <div id="terminal-background">
           <div id="content">
-            <div className="msg-type1">
-              Welcome to Vim-me!!
-            </div>
-
-            <div className="msg-type2">
-              Welcome to Vim-me!!
-            </div>
-
-            <div className="msg-type1">
-              Welcome to Vim-me!!
-            </div>
-
-            <div className="msg-type1">
-              Welcome to Vim-me!!
-            </div>
-
-            <div className="msg-type2">
-              Welcome to Vim-me!!
-            </div>
+            {tutorials.map((tutorial, idx) =>
+              <div key={idx} className={`msg-type${(idx % 2) + 1}`}>
+                {tutorial.content}
+              </div>,
+            )}
 
           </div>
           <div id="terminal">
             <Route exact path="/" component={EditorPage} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/intro" component={Intro} />
             <Route path="/quit" component={Home} />
           </div>
         </div>

@@ -27,6 +27,7 @@ class Editor extends PureComponent {
   }
 
   componentDidMount() {
+    this.initTutorials();
     this.quill = new Quill('#editor', {
       theme: 'snow',
       readOnly: false,
@@ -39,7 +40,10 @@ class Editor extends PureComponent {
     });
     this.quill.keyboard.addBinding({
       key: Keyboard.keys.ESCAPE,
-    }, this.focusInput);
+    }, () => {
+      this.props.addTutorial('To save your data => Type your data in provided editor then press ESC and then type \':w\' ');
+      this.focusInput();
+    });
     localforage.getItem(FILE_KEY)
     .catch(console.error);
     localforage.getItem(FILE_KEY)
@@ -53,6 +57,19 @@ class Editor extends PureComponent {
       this.quill.focus();
       this.getFile();
     });
+  }
+
+  initTutorials() {
+    const TIMEDIFF = 10;
+    setTimeout(() => {
+      this.props.addTutorial('Start typing in provided vim editor');
+      setTimeout(() => {
+        this.props.addTutorial('The following tutorials will tell you about writing, quiting, undo, redo, set commands and search');
+        setTimeout(() => {
+          this.props.addTutorial('IMPORTNAT!\nBefore typing any command, mentioned above Don\'t forget to press ESC');
+        }, TIMEDIFF)
+      }, TIMEDIFF)
+    }, TIMEDIFF);
   }
 
   getFile = () => {
@@ -127,6 +144,11 @@ class Editor extends PureComponent {
 
   quit = () => {
     this.props.history.push('/quit');
+    this.props.addTutorial('For undo: \':u\'');
+    this.props.addTutorial('For redo: \':redo\'');
+    this.props.addTutorial('For setting number lines: \':set number\'');
+    this.props.addTutorial('For removing number lines: \':set nonumber\'');
+    this.props.addTutorial('For Search: \':?keyword\'');
   }
 
   redo = () => {
@@ -157,6 +179,7 @@ class Editor extends PureComponent {
     .then(() => {
       this.showInfo(`${text.split('\n').length - 1}L, ${text.length}C written`);
       this.saveFile(text);
+      this.props.addTutorial('Your data is succesfully written, if you wish to exit without saving, type \':q\'');
     });
   }
 

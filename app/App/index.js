@@ -4,7 +4,7 @@ import App from './App';
 import { setTheme } from '../actions/theme';
 
 export default connect(
-  ({ theme }) => ({ theme }),
+  ({ theme, tutorials }) => ({ theme, tutorials }),
   dispatch => ({
     setTheme: theme => dispatch(setTheme(theme)),
   }),
