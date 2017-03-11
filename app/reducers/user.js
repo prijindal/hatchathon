@@ -4,16 +4,16 @@ import type { Action } from '../actions/types';
 import { SET_USER } from '../actions/user';
 
 export type State = {
-  name: string
+  token: string
 }
 
 const INITIAL_STATE = Immutable({
-  name: '',
+  token: '',
 });
 
 const setUser = (state: State = INITIAL_STATE, action: Action) => ({
   ...state,
-  name: action.payload,
+  token: action.payload,
 });
 
 const HANDLERS = {

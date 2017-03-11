@@ -5,8 +5,8 @@ import {
 } from 'react-router-dom';
 
 
-import Editor from '../components/Editor/Editor';
-import Login from '../components/Login/Login';
+import Editor from '../components/Editor';
+import Login from '../components/Login';
 import Home from '../components/Home/Home';
 
 const App = () => (

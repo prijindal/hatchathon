@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import localforage from 'localforage';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import Quill from 'quill';
 import 'quill/dist/quill.core.css';
@@ -159,6 +159,9 @@ class Editor extends PureComponent {
   }
 
   render() {
+    if (!this.props.user || !this.props.user.token) {
+      return <Redirect to="/login"/>
+    }
     return (
       <div>
         <span id="head-terminal">Vim-me</span>
