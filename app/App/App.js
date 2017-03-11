@@ -8,7 +8,6 @@ import commands from '../utils/commands';
 
 import search from '../utils/search';
 
-
 // console.log(search('ABCDDABC', 'ABC'));
 
 class App extends PureComponent {
@@ -46,8 +45,9 @@ class App extends PureComponent {
   render() {
     return (
       <div>
-        <h1>Vim-me</h1>
+        <div id="heading">Vim-<span id="heading-bold">me</span></div>
         <div id="terminal">
+          <span id="head-terminal">Vim-me</span>
           {/* <textarea ref={(c) => { this.textarea = c; }} cols={79} rows={28} id="editor" /> */}
           <div id="editor" />
           <br />
