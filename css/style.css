@@ -205,7 +205,7 @@ MESSAGES
 	height: 80px;
 	background: #a8abad;
 	border-radius: 20px 20px 0 20px;
-	border: 1px dotted #157bd0;
+	border: 2px solid #157bd0;
 	text-align: left;
 }
 
@@ -218,7 +218,7 @@ MESSAGES
 	background: #157bd0;
 	color: white;
 	border-radius: 20px 20px 20px 0;
-	border: 1px dotted #a8abad;
+	border: 2px solid #a8abad;
 	text-align: left;
 }
 
