@@ -112,6 +112,10 @@ COLOR Schemes
 	background: black;
 }
 
+.black #heading {
+  color: #ffffff;
+}
+
 .steelblue {
 	background: steelblue;
 }
