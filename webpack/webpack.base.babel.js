@@ -14,7 +14,7 @@ module.exports = options => ({
       exclude: /node_modules/,
     }, {
       test: /\.css$/,
-      include: /(node_modules|app)/,
+      include: /(node_modules|app|css)/,
       loaders: ['style-loader', 'css-loader'],
     }, {
       test: /\.(eot|svg|woff|woff2|ttf)$/,
