@@ -1,24 +1,49 @@
 
-#commands {
-	width: 651px;
-	height: 40px;
-	color: #fff;
-	border-radius: 0 0 10px 10px ;
-}
+/*********************************************************
+HEAD
+*********************************************************/
+
+/*html{
+	height: 100%;
+}*/
+
+
+/*body{
+	height: 100%;
+	background: -webkit-linear-gradient(left top, pink, #ece49c, white, #9df0fb);
+	background: -moz-linear-gradient(bottom right, pink, #ece49c, white, #9df0fb);
+}*/
+
+/*********************************************************
+TERMINAL
+*********************************************************/
+
 
 #terminal {
-	margin: 50px auto;
-	text-align: center;;
+	margin: 30px auto;
+	text-align: center;
+	background: steelblue;
+	padding: 10px 0;
 }
 
-#editor {
-	color: #fff;
-	border-radius: 10px 10px 0 0 ;
-}
 
 #commands,
 #editor {
+	width: 51%;
+	color: #fff;
 	font-family: 'Ubuntu Mono', monospace;
 	background: #424040;
 	font-size: 1em;
+}
+
+#commands {
+	height: 40px;
+	border-radius: 0 0 10px 10px ;
+	border: 2px solid #424040;
+}
+
+
+#editor {
+	border-radius: 10px 10px 0 0 ;
+	border-top: 30px solid #fff;
 }
