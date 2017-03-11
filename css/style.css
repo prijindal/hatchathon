@@ -1,9 +1,20 @@
 
-input[type="text"] {
+#commands {
 	width: 739px;
+	height: 40px;
+	color: #fff;
 }
 
 #terminal {
 	margin: 50px auto;	
 	text-align: center;
+}
+
+#editor {
+	color: #fff;
+}
+
+#commands,
+#editor {
+	background: #424040;
 }
