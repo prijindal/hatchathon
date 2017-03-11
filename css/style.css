@@ -4,8 +4,7 @@ HEAD
 *********************************************************/
 #heading {
 	font-size: 2.5em ;
-    font-family: sans-serif;
-    font-weight: lighter;
+    font-family: 'Ubuntu Mono', monospace;
 }
 
 #heading-bold{
@@ -43,6 +42,7 @@ TERMINAL
 	/*text-align: center;*/
 	position: relative;
 	top: 23px;
+    z-index: 2;
 
 }
 
@@ -59,13 +59,16 @@ TERMINAL
 #commands {
 	height: 40px;
 	border-radius: 0 0 10px 10px ;
-	border: 2px solid #424040;
+	border: 1px solid #424040;
+    outline: none;
 }
 
 
 #editor {
 	border-radius: 10px 10px 0 0 ;
+    border-left: 1px solid #424040;
+    border-right: 1px solid #424040;
 	border-top: 30px solid #fff;
-  margin: 0 auto;
-  height: 400px;
+    margin: 0 auto;
+    height: 400px;
 }

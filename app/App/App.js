@@ -50,7 +50,6 @@ class App extends PureComponent {
           <span id="head-terminal">Vim-me</span>
           {/* <textarea ref={(c) => { this.textarea = c; }} cols={79} rows={28} id="editor" /> */}
           <div id="editor" />
-          <br />
           <input onKeyUp={this.onKeyUp} type="text" name="commands" id="commands" />
         </div>
       </div>
