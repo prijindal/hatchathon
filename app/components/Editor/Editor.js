@@ -6,6 +6,8 @@ import Quill from 'quill';
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 
+import { getFile, saveFile } from '../../utils/firebase';
+
 import commands from '../../utils/commands';
 
 import search from '../../utils/search';
@@ -39,11 +41,37 @@ class Editor extends PureComponent {
       key: Keyboard.keys.ESCAPE,
     }, this.focusInput);
     localforage.getItem(FILE_KEY)
+    .catch(console.error);
+    localforage.getItem(FILE_KEY)
     .then((text) => {
+      this.getFile();
       this.quill.focus();
       if (!text) return;
       this.quill.insertText(0, text);
+    })
+    .catch(() => {
+      this.quill.focus();
+      this.getFile();
     });
+  }
+
+  getFile = () => {
+    getFile()
+    .then((text) => {
+      console.log(text);
+      this.quill.focus();
+      if (!text) return;
+      this.quill.deleteText(0, this.quill.getText().length);
+      this.quill.insertText(0, text);
+    })
+    .catch((err) => {
+      console.error(err);
+      this.quill.focus();
+    });
+  }
+
+  saveFile = (text) => {
+    saveFile(text);
   }
 
   focusInput = () => {
@@ -130,6 +158,7 @@ class Editor extends PureComponent {
     localforage.setItem(FILE_KEY, text)
     .then(() => {
       this.showInfo(`${text.split('\n').length - 1}L, ${text.length}C written`);
+      this.saveFile(text);
     });
   }
 

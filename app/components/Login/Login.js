@@ -1,19 +1,11 @@
 import React, { PureComponent } from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
-import firebase from '../../utils/firebase';
+import { Redirect } from 'react-router-dom';
+import { login } from '../../utils/firebase';
 
 class Login extends PureComponent {
-  componentWillMount() {
-    this.provider = new firebase.auth.GoogleAuthProvider();
-  }
-
   login = () => {
-    firebase.auth().signInWithPopup(this.provider).then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const token = result.credential.accessToken;
-      this.props.setUser(token);
-      // ...
-    }).catch(() => {});
+    login()
+    .then(token => this.props.setUser(token));
   }
 
   render() {
