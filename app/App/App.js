@@ -83,11 +83,13 @@ class App extends PureComponent {
     return (
       <div>
         <div id="heading">Vim-<span id="heading-bold">me</span></div>
-        <div id="terminal">
-          <span id="head-terminal">Vim-me</span>
-          {/* <textarea ref={(c) => { this.textarea = c; }} cols={79} rows={28} id="editor" /> */}
-          <div id="editor" />
-          <input ref={(c) => { this.input = c; }} onKeyUp={this.onKeyUp} type="text" name="commands" id="commands" />
+        <div id="terminal-background">
+          <div id="terminal">
+            <span id="head-terminal">Vim-me</span>
+            {/* <textarea ref={(c) => { this.textarea = c; }} cols={79} rows={28} id="editor" /> */}
+            <div id="editor" />
+            <input ref={(c) => { this.input = c; }} onKeyUp={this.onKeyUp} type="text" name="commands" id="commands" />
+          </div>
         </div>
       </div>
     );
