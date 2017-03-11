@@ -6,6 +6,7 @@ class Login extends PureComponent {
   render() {
     return (
       <div onClick={() => history.push('/')}>
+        <a href="#" className="button"><div id="click">Login with Google</div></a>
         <span id="head-terminal">Vim-me</span>
         {/* <textarea ref={(c) => { this.textarea = c; }} cols={79} rows={28} id="editor" /> */}
         <div id="editor">Login</div>
