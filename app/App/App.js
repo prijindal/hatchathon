@@ -25,7 +25,11 @@ const App = () => (
       <footer>
         <div>
           <ul>
-            <li><a href=".default">R</a></li>
+            <li><a href=".default"><div id="a1"></div></a></li>
+            <li><a href=".yellow-blue"><div id="a2"></div></a></li>
+            <li><a href=".black"><div id="a3"></div></a></li>
+            <li><a href=".steelblue"><div id="a4"></div></a></li>
+            <li><a href=".fire"><div id="a5"></div></a></li>
           </ul>
         </div>
       </footer>
