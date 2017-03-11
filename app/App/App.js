@@ -10,6 +10,8 @@ import Login from '../components/Login';
 import Intro from '../components/Intro/Intro';
 import Home from '../components/Home/Home';
 
+import tutorialsText from '../utils/tutorials';
+
 const THEMES = [
   'default',
   'yellow-blue',
@@ -28,7 +30,7 @@ const App = ({ setTheme, theme, tutorials }) => (
           <div id="content">
             {tutorials.map((tutorial, idx) =>
               <div key={idx} className={`msg-type${(idx % 2) + 1}`}>
-                {tutorial.content}
+                {tutorialsText[tutorial]}
               </div>,
             )}
 

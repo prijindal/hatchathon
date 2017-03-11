@@ -2,16 +2,14 @@ import React, { PureComponent } from 'react';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../utils/firebase';
 
-import { login as loginMessage, login2 as loginGoogle, loggedIn } from '../../utils/tutorials';
-
 class Login extends PureComponent {
   state = {
     login: false,
   }
 
   componentDidMount() {
-    this.props.addTutorial(loginMessage);
-    this.props.addTutorial(loginGoogle);
+    this.props.addTutorial('login');
+    this.props.addTutorial('login2');
   }
 
   login = () => {
@@ -21,7 +19,7 @@ class Login extends PureComponent {
         login: true,
       }, () => {
         this.props.setUser(user)
-        this.props.addTutorial(loggedIn);
+        this.props.addTutorial('loggedIn');
       });
     })
   }

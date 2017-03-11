@@ -19,6 +19,7 @@ const FILE_KEY = 'file';
 class Editor extends PureComponent {
   static propTypes = {
      history: PropTypes.object.isRequired, // eslint-disable-line
+     addTutorial: PropTypes.func.isRequired,
   }
 
   state = {
@@ -41,7 +42,7 @@ class Editor extends PureComponent {
     this.quill.keyboard.addBinding({
       key: Keyboard.keys.ESCAPE,
     }, () => {
-      this.props.addTutorial('To save your data => Type your data in provided editor then press ESC and then type \':w\' ');
+      this.props.addTutorial('write');
       this.focusInput();
     });
     localforage.getItem(FILE_KEY)
@@ -62,11 +63,11 @@ class Editor extends PureComponent {
   initTutorials() {
     const TIMEDIFF = 10;
     setTimeout(() => {
-      this.props.addTutorial('Start typing in provided vim editor');
+      this.props.addTutorial('typing');
       setTimeout(() => {
-        this.props.addTutorial('The following tutorials will tell you about writing, quiting, undo, redo, set commands and search');
+        this.props.addTutorial('info');
         setTimeout(() => {
-          this.props.addTutorial('IMPORTNAT!\nBefore typing any command, mentioned above Don\'t forget to press ESC');
+          this.props.addTutorial('escape');
         }, TIMEDIFF)
       }, TIMEDIFF)
     }, TIMEDIFF);
@@ -144,11 +145,11 @@ class Editor extends PureComponent {
 
   quit = () => {
     this.props.history.push('/quit');
-    this.props.addTutorial('For undo: \':u\'');
-    this.props.addTutorial('For redo: \':redo\'');
-    this.props.addTutorial('For setting number lines: \':set number\'');
-    this.props.addTutorial('For removing number lines: \':set nonumber\'');
-    this.props.addTutorial('For Search: \':?keyword\'');
+    this.props.addTutorial('undo');
+    this.props.addTutorial('redo');
+    this.props.addTutorial('setnum');
+    this.props.addTutorial('setnonum');
+    this.props.addTutorial('search');
   }
 
   redo = () => {
@@ -179,7 +180,7 @@ class Editor extends PureComponent {
     .then(() => {
       this.showInfo(`${text.split('\n').length - 1}L, ${text.length}C written`);
       this.saveFile(text);
-      this.props.addTutorial('Your data is succesfully written, if you wish to exit without saving, type \':q\'');
+      this.props.addTutorial('quit');
     });
   }
 

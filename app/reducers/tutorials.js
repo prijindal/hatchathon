@@ -7,12 +7,18 @@ export type State = [];
 
 const INITIAL_STATE = Immutable([]);
 
-const addTutorial = (state: State = INITIAL_STATE, action: Action) => ([
-  ...state,
-  {
-    content: action.content,
-  },
-]);
+const addTutorial = (state: State = INITIAL_STATE, action: Action) => {
+  for (let i = 0; i < state.length; i++) {
+    if (state[i] === action.content) {
+      return state;
+    }
+  }
+  // if (action.content in state) return state;
+  return [
+    ...state,
+    action.content,
+  ];
+};
 
 const HANDLERS = {
   [ADD_TUTORIAL]: addTutorial,
