@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import pkg from '../../package.json';
 import Quill from 'quill';
 
 import 'quill/dist/quill.core.css';
@@ -36,7 +35,6 @@ class App extends PureComponent {
       const text = this.quill.getText();
       const results = search(text, argument);
       results.forEach((result) => {
-        console.log(result);
         this.quill.deleteText(result[0], argument.length);
         this.quill.insertText(result[0], text.substring(result[0], result[1]), {
           color: '#ffff00',
@@ -49,7 +47,7 @@ class App extends PureComponent {
     return (
       <div id="terminal">
         {/* <textarea ref={(c) => { this.textarea = c; }} cols={79} rows={28} id="editor" /> */}
-        <div id="editor">{JSON.stringify(pkg)}</div>
+        <div id="editor" />
         <br />
         <input onKeyUp={this.onKeyUp} type="text" name="commands" id="commands" />
       </div>
