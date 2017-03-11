@@ -43,7 +43,7 @@ TERMINAL
 	/*text-align: center;*/
 	position: relative;
 	top: 23px;
-
+  z-index: 2;
 }
 
 
