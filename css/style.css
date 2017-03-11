@@ -46,4 +46,6 @@ TERMINAL
 #editor {
 	border-radius: 10px 10px 0 0 ;
 	border-top: 30px solid #fff;
+  margin: 0 auto;
+  height: 400px;
 }
