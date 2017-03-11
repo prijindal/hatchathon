@@ -38,7 +38,7 @@ LOGIN
 	height: 50px;
 	position: absolute;
 	top: 250px;
-	left: 450px;
+	left: 720px;
 
 }
 
@@ -166,6 +166,39 @@ div #terminal-background #content {
 
 
 
+
+/*********************************************************
+MESSAGES
+*********************************************************/
+/*
+#content {
+	background: white;
+
+}*/
+
+
+#content .msg-type1 {
+	float: right;
+	padding: 8px;
+	margin: 10px 90px 10px 20px;
+	width: 300px;
+	height: 80px;
+	background: #a8abad;
+	border-radius: 20px 20px 0 20px;
+	text-align: left;
+}
+
+#content .msg-type2 {
+	float: right;
+	padding: 8px;
+	margin: 10px 20px 10px 90px;
+	width: 300px;
+	height: 80px;
+	background: #157bd0;
+	color: white;
+	border-radius: 20px 20px 20px 0;
+	text-align: left;
+}
 
 /*********************************************************
 FOOTER
