@@ -4,14 +4,21 @@ import {
   Route,
 } from 'react-router-dom';
 
+const THEMES = [
+  'default',
+  'yellow-blue',
+  'black',
+  'steelblue',
+  'fire',
+];
 
 import Editor from '../components/Editor';
 import Login from '../components/Login';
 import Home from '../components/Home/Home';
 
-const App = () => (
+const App = ({ setTheme, theme }) => (
   <Router>
-    <div id="main">
+    <div id="main" className={theme}>
       <div id="flex1">
         <div id="heading">Vim-<span id="heading-bold">me</span></div>
 
@@ -27,11 +34,9 @@ const App = () => (
       <footer>
         <div>
           <ul>
-            <li><a href=".default"><div id="a1"></div></a></li>
-            <li><a href=".yellow-blue"><div id="a2"></div></a></li>
-            <li><a href=".black"><div id="a3"></div></a></li>
-            <li><a href=".steelblue"><div id="a4"></div></a></li>
-            <li><a href=".fire"><div id="a5"></div></a></li>
+            {THEMES.map((theme, idx) =>
+              <li key={idx}><a onClick={() => setTheme(theme)} href="#"><div id={`a${idx + 1}`}></div></a></li>
+            )}
           </ul>
         </div>
       </footer>
