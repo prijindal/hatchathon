@@ -1,5 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import localforage from 'localforage';
+import { withRouter } from 'react-router-dom';
 
 import Quill from 'quill';
 import 'quill/dist/quill.core.css';
@@ -13,7 +14,11 @@ const Keyboard = Quill.imports['modules/keyboard'];
 
 const FILE_KEY = 'file';
 
-class App extends PureComponent {
+class Editor extends PureComponent {
+  static propTypes = {
+     history: PropTypes.object.isRequired, // eslint-disable-line
+  }
+
   state = {
     error: false,
     disabled: false,
@@ -35,6 +40,7 @@ class App extends PureComponent {
     }, this.focusInput);
     localforage.getItem(FILE_KEY)
     .then((text) => {
+      this.quill.focus();
       if (!text) return;
       this.quill.insertText(0, text);
     });
@@ -76,6 +82,8 @@ class App extends PureComponent {
       this.undo();
     } else if (command === 'redo') {
       this.redo();
+    } else if (command === 'quit') {
+      this.quit();
     } else if (command === 'error') {
       this.showError(argument, text);
     }
@@ -89,6 +97,10 @@ class App extends PureComponent {
     } else {
       this.showInfo('Already at oldest change');
     }
+  }
+
+  quit = () => {
+    this.props.history.push('/quit');
   }
 
   redo = () => {
@@ -152,10 +164,20 @@ class App extends PureComponent {
         <span id="head-terminal">Vim-me</span>
         {/* <textarea ref={(c) => { this.textarea = c; }} cols={79} rows={28} id="editor" /> */}
         <div id="editor" />
-        <input ref={(c) => { this.input = c; }} onKeyUp={this.onKeyUp} type="text" name="commands" id="commands" />
+        <input
+          ref={(c) => { this.input = c; }}
+          onKeyUp={this.onKeyUp}
+          type="text"
+          name="commands"
+          id="commands"
+          disabled={this.state.disabled}
+          className={this.state.error ? 'error' : ''}
+        />
       </div>
     );
   }
 }
 
-export default App;
+const EditorContainer = withRouter(Editor);
+
+export default EditorContainer;

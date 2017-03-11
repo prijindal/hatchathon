@@ -30,6 +30,10 @@ const commands = (input) => {
       return undo();
     } else if (input.length > 4 && input === ':redo') {
       return redo();
+    } else if (input[1] === 'q') {
+      return {
+        command: 'quit',
+      };
     }
   } else if (input[0] === '?' && input.length > 1) {
     return searchAction(input.substr(1));
