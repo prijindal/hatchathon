@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import 'sanitize.css/sanitize.css';
 
 import '../css/style.css';
-import App from './App/App';
+import App from './setup';
 
 ReactDOM.render(
   <App />,
