@@ -71,6 +71,10 @@ div #terminal-background #terminal {
   outline: none;
 }
 
+#commands.error {
+  background-color: red;
+  color: white;
+}
 
 #editor {
 	border-radius: 10px 10px 0 0 ;

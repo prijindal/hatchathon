@@ -14,12 +14,20 @@ const Keyboard = Quill.imports['modules/keyboard'];
 const FILE_KEY = 'file';
 
 class App extends PureComponent {
+  state = {
+    error: false,
+    disabled: false,
+  }
+
   componentDidMount() {
     this.quill = new Quill('#editor', {
       theme: 'snow',
       readOnly: false,
       modules: {
         toolbar: false,
+      },
+      history: {
+        delay: 100,
       },
     });
     this.quill.keyboard.addBinding({
@@ -33,18 +41,29 @@ class App extends PureComponent {
   }
 
   focusInput = () => {
+    this.setState({
+      error: false,
+      disabled: false,
+    });
+    this.input.value = '';
     this.input.focus();
   }
 
   onKeyUp = (e) => {
-    if (e.keyCode === 13) {
+    this.setState({
+      error: false,
+      disabled: false,
+    });
+    if (e.keyCode === Keyboard.keys.ENTER) {
       this.onEnter(e);
+    } else if (e.keyCode === Keyboard.keys.ESCAPE) {
+      this.focusInput();
     }
   }
 
   onEnter = (e) => {
     const value = e.target.value;
-    const { command, argument } = commands(value);
+    const { command, argument, text } = commands(value);
     if (command === 'search') {
       this.search(argument);
     } else if (command === 'write') {
@@ -53,6 +72,32 @@ class App extends PureComponent {
       this.setNumber();
     } else if (command === 'setNoNumber') {
       this.setNoNumber();
+    } else if (command === 'undo') {
+      this.undo();
+    } else if (command === 'undo') {
+      this.redo();
+    } else if (command === 'error') {
+      this.showError(argument, text);
+    }
+  }
+
+  undo = () => {
+    const { history } = this.quill;
+    if (history.stack.undo.length > 0) {
+      history.undo();
+      this.focusInput();
+    } else {
+      this.showInfo('Already at oldest change');
+    }
+  }
+
+  redo = () => {
+    const { history } = this.quill;
+    if (history.stack.redo.length > 0) {
+      history.redo();
+      this.focusInput();
+    } else {
+      this.showInfo('Already at newest change');
     }
   }
 
@@ -62,13 +107,18 @@ class App extends PureComponent {
     this.quill.removeFormat(0, text.length);
     results.forEach((result) => {
       this.quill.formatText(result[0], argument.length, {
-        color: '#ffff00',
+        'background-color': '#ffff00',
+        color: '#000',
       });
     });
   }
 
   write = () => {
-    localforage.setItem(FILE_KEY, this.quill.getText());
+    const text = this.quill.getText();
+    localforage.setItem(FILE_KEY, text)
+    .then(() => {
+      this.showInfo(`${text.split('\n').length - 1}L, ${text.length}C written`);
+    });
   }
 
   setNumber = () => {
@@ -77,6 +127,23 @@ class App extends PureComponent {
 
   setNoNumber = () => {
     this.quill.removeFormat(1, this.quill.getText().length);
+  }
+
+  showError = (code, text) => {
+    this.input.value = `E${code} ${text}`;
+    this.setState({
+      error: code,
+      disabled: true,
+    });
+    this.quill.focus();
+  }
+
+  showInfo = (text) => {
+    this.input.value = text;
+    this.setState({
+      disabled: true,
+    });
+    this.quill.focus();
   }
 
   render() {
@@ -88,7 +155,15 @@ class App extends PureComponent {
             <span id="head-terminal">Vim-me</span>
             {/* <textarea ref={(c) => { this.textarea = c; }} cols={79} rows={28} id="editor" /> */}
             <div id="editor" />
-            <input ref={(c) => { this.input = c; }} onKeyUp={this.onKeyUp} type="text" name="commands" id="commands" />
+            <input
+              ref={(c) => { this.input = c; }}
+              onKeyUp={this.onKeyUp}
+              type="text"
+              className={this.state.error ? 'error' : ''}
+              disabled={this.state.disabled}
+              name="commands"
+              id="commands"
+            />
           </div>
         </div>
       </div>

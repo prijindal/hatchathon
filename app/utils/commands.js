@@ -1,19 +1,21 @@
-const searchAction = input => ({
+const searchAction = argument => ({
   command: 'search',
   argument,
 });
+
+const undo = () => ({ command: 'undo' });
+
+const redo = () => ({ command: 'redo' });
 
 const commands = (input) => {
   if (input[0] === ':') {
     if (input[1] === '?' && input.length > 2) {
       return searchAction(input.substr(2));
-    }
-    if (input[1] === 'w') {
+    } else if (input[1] === 'w') {
       return {
         command: 'write',
       };
-    }
-    if (input[1] === 's' && input.length > 4) {
+    } else if (input[1] === 's' && input.length > 4) {
       const subCommand = input.substr(5);
       if (subCommand === 'number') {
         return {
@@ -24,12 +26,21 @@ const commands = (input) => {
           command: 'setNoNumber',
         };
       }
+    } else if (input[1] === 'u') {
+      return undo();
+    } else if (input.length > 4 && input === ':redo') {
+      return redo();
     }
-  }
-  if (input[0] === '?' && input.length > 1) {
+  } else if (input[0] === '?' && input.length > 1) {
     return searchAction(input.substr(1));
+  } else if (input[0] === 'u') {
+    return undo();
   }
-  return {};
+  return {
+    command: 'error',
+    argument: 492,
+    text: `Not an editor command: ${input}`,
+  };
 };
 
 export default commands;
