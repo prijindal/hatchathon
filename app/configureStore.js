@@ -9,7 +9,7 @@ export default function configureStore(onCompletion:()=>void):any {
   );
 
   const store = createStore(reducer, enhancer);
-  persistStore(store, {}, onCompletion);
+  persistStore(store, {blacklist: ['tutorials']}, onCompletion);
 
   return store;
 }

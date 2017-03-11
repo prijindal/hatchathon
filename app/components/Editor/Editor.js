@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import localforage from 'localforage';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import Quill from 'quill';
 import 'quill/dist/quill.core.css';
@@ -27,6 +27,7 @@ class Editor extends PureComponent {
   }
 
   componentDidMount() {
+    this.initTutorials();
     this.quill = new Quill('#editor', {
       theme: 'snow',
       readOnly: false,
@@ -39,7 +40,10 @@ class Editor extends PureComponent {
     });
     this.quill.keyboard.addBinding({
       key: Keyboard.keys.ESCAPE,
-    }, this.focusInput);
+    }, () => {
+      this.props.addTutorial('To save your data => Type your data in provided editor then press ESC and then type \':w\' ');
+      this.focusInput();
+    });
     localforage.getItem(FILE_KEY)
     .catch(console.error);
     localforage.getItem(FILE_KEY)
@@ -55,23 +59,34 @@ class Editor extends PureComponent {
     });
   }
 
+  initTutorials() {
+    const TIMEDIFF = 10;
+    setTimeout(() => {
+      this.props.addTutorial('Start typing in provided vim editor');
+      setTimeout(() => {
+        this.props.addTutorial('The following tutorials will tell you about writing, quiting, undo, redo, set commands and search');
+        setTimeout(() => {
+          this.props.addTutorial('IMPORTNAT!\nBefore typing any command, mentioned above Don\'t forget to press ESC');
+        }, TIMEDIFF)
+      }, TIMEDIFF)
+    }, TIMEDIFF);
+  }
+
   getFile = () => {
-    getFile()
+    getFile(this.props.user.user.email)
     .then((text) => {
-      console.log(text);
       this.quill.focus();
       if (!text) return;
       this.quill.deleteText(0, this.quill.getText().length);
       this.quill.insertText(0, text);
     })
     .catch((err) => {
-      console.error(err);
       this.quill.focus();
     });
   }
 
   saveFile = (text) => {
-    saveFile(text);
+    saveFile(this.props.user.user.email,text);
   }
 
   focusInput = () => {
@@ -129,6 +144,11 @@ class Editor extends PureComponent {
 
   quit = () => {
     this.props.history.push('/quit');
+    this.props.addTutorial('For undo: \':u\'');
+    this.props.addTutorial('For redo: \':redo\'');
+    this.props.addTutorial('For setting number lines: \':set number\'');
+    this.props.addTutorial('For removing number lines: \':set nonumber\'');
+    this.props.addTutorial('For Search: \':?keyword\'');
   }
 
   redo = () => {
@@ -159,6 +179,7 @@ class Editor extends PureComponent {
     .then(() => {
       this.showInfo(`${text.split('\n').length - 1}L, ${text.length}C written`);
       this.saveFile(text);
+      this.props.addTutorial('Your data is succesfully written, if you wish to exit without saving, type \':q\'');
     });
   }
 
@@ -188,9 +209,6 @@ class Editor extends PureComponent {
   }
 
   render() {
-    if (!this.props.user || !this.props.user.token) {
-      return <Redirect to="/login"/>
-    }
     return (
       <div>
         <span id="head-terminal">Vim-me</span>
