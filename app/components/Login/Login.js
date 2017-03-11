@@ -14,10 +14,12 @@ class Login extends PureComponent {
     }
     return (
       <div onClick={this.login}>
-        <a href="#" className="button"><div id="click">Login with Google</div></a>
+        
         <span id="head-terminal">Vim-me</span>
         {/* <textarea ref={(c) => { this.textarea = c; }} cols={79} rows={28} id="editor" /> */}
-        <div id="editor">Login</div>
+        <div id="editor">Login
+          <a href="#" className="button"><div id="click">Login with Google</div></a>
+        </div>
         <input disabled={true} id="commands" />
       </div>
     )
